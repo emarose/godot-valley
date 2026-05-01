@@ -4,6 +4,8 @@ extends CharacterBody2D
 var direction: Vector2
 var speed:= 300
 
+enum Tools { HOE, AXE, WATER }
+var current_tool : Tools = Tools.AXE
 
 func _physics_process(_delta: float) -> void:
 	get_input()
@@ -13,6 +15,12 @@ func _physics_process(_delta: float) -> void:
 	
 func get_input():
 	direction = Input.get_vector("left","right","up","down")
+	
+	if Input.is_action_just_pressed("tool_forward") or Input.is_action_just_pressed("tool_backward"):
+		var tool_direction = Input.get_axis("tool_backward", "tool_forward") as int
+		current_tool = posmod(current_tool + tool_direction, Tools.size()) as Tools
+		print(current_tool)
+
 
 func animation():
 	if direction:
