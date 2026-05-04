@@ -1,4 +1,4 @@
-[gd_scene load_steps=102 format=3 uid="uid://ca106qafnt25o"]
+[gd_scene format=3 uid="uid://ca106qafnt25o"]
 
 [ext_resource type="Script" uid="uid://cvqx8g77lc3md" path="res://scenes/player/player.gd" id="1_dovo2"]
 [ext_resource type="Texture2D" uid="uid://dpfxibevth7y" path="res://graphics/characters/player_animations.png" id="2_yewv4"]
@@ -861,34 +861,32 @@ graph_offset = Vector2(-224, -191)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_6eyoc"]
 graph_offset = Vector2(-135.993, 29.1405)
+nodes/output/position = Vector2(888, 144)
 nodes/MoveStateMachine/node = SubResource("AnimationNodeStateMachine_lvxji")
 nodes/MoveStateMachine/position = Vector2(272, 160)
 nodes/OneShot/node = SubResource("AnimationNodeOneShot_dovo2")
 nodes/OneShot/position = Vector2(656, 136)
 nodes/ToolStateMachine/node = SubResource("AnimationNodeStateMachine_vwwfy")
 nodes/ToolStateMachine/position = Vector2(280, 368)
-nodes/output/position = Vector2(888, 144)
-node_connections = [&"OneShot", 0, &"MoveStateMachine", &"OneShot", 1, &"ToolStateMachine", &"output", 0, &"OneShot"]
+node_connections = [&"output", 0, &"OneShot", &"OneShot", 0, &"MoveStateMachine", &"OneShot", 1, &"ToolStateMachine"]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=286005926]
 collision_layer = 2
-collision_mask = 13
+collision_mask = 5
 script = ExtResource("1_dovo2")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1330770451]
 texture = ExtResource("2_yewv4")
 hframes = 26
 vframes = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=31869533]
 shape = SubResource("CapsuleShape2D_yewv4")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_atpat")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=10716690]
+libraries/ = SubResource("AnimationLibrary_atpat")
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1165292980]
 tree_root = SubResource("AnimationNodeBlendTree_6eyoc")
 anim_player = NodePath("../AnimationPlayer")
 parameters/MoveStateMachine/idle/blend_position = Vector2(0, 0)
@@ -900,6 +898,6 @@ parameters/ToolStateMachine/axe/blend_position = Vector2(-0.368759, 0.645492)
 parameters/ToolStateMachine/hoe/blend_position = Vector2(-0.536646, -0.652174)
 parameters/ToolStateMachine/water/blend_position = Vector2(0, 0)
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=119552337]
 
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
